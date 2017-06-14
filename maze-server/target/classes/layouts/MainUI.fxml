@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.SubScene?>
+<?import javafx.scene.text.Font?>
+<StackPane fx:id="rootPane" prefHeight="544.0" prefWidth="872.0" stylesheets="@MainUI.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.fhac.mazenet.server.userinterface.mazeFX.C_MainUI">
+	<children>
+		<HBox prefHeight="100.0" prefWidth="200.0">
+			<children>
+				<StackPane fx:id="parent3D" minHeight="0.0" minWidth="0.0" prefHeight="552.0" prefWidth="778.0" HBox.hgrow="ALWAYS">
+					<children>
+						<SubScene fx:id="sub3D" height="200.0" width="200.0">
+							<root>
+								<Region />
+							</root>
+						</SubScene>
+						<Pane fx:id="cntrls3D" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="630.0" prefWidth="364.0" StackPane.alignment="TOP_LEFT">
+							<children>
+								<VBox alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="270.0" prefWidth="75.0" spacing="10.0" styleClass="nav3DVBox">
+									<children>
+										<TilePane alignment="CENTER" prefColumns="3" prefHeight="120.0" prefRows="3" prefTileHeight="25.0" prefTileWidth="25.0" prefWidth="120.0" styleClass="move3dGrid" VBox.vgrow="NEVER">
+											<children>
+												<Label graphicTextGap="0.0" styleClass="dummy" />
+												<Button mnemonicParsing="false" text="⬘" />
+												<Label graphicTextGap="0.0" styleClass="dummy" />
+												<Button mnemonicParsing="false" onMousePressed="#camRotLeftBtMousePress" onMouseReleased="#camRotLeftBtMouseRelease" text="⬖" />
+												<Button mnemonicParsing="false" text="■" />
+												<Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onMousePressed="#camRotRightBtMousePress" onMouseReleased="#camRotRightBtMouseRelease" text="⬗" />
+												<Label graphicTextGap="0.0" styleClass="dummy" />
+												<Button minWidth="-Infinity" mnemonicParsing="false" text="⬙" />
+												<Label graphicTextGap="0.0" styleClass="dummy" />
+											</children>
+										</TilePane>
+										<Slider fx:id="camZoomSlide" majorTickUnit="5.0" max="-5.0" min="-30.0" minorTickCount="0" orientation="VERTICAL" value="-15.0" VBox.vgrow="ALWAYS" />
+									</children>
+									<effect>
+										<DropShadow blurType="GAUSSIAN" color="#969696b2" height="30.0" radius="14.5" width="30.0" />
+									</effect>
+								</VBox>
+							</children>
+						</Pane>
+					</children>
+				</StackPane>
+				<VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="250.0" HBox.hgrow="NEVER">
+					<children>
+						<TitledPane collapsible="false" styleClass="serverSettingsPane" text="%MazeFX.server">
+							<content>
+								<AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="200.0">
+									<children>
+										<GridPane hgap="10.0" vgap="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+											<columnConstraints>
+												<ColumnConstraints fillWidth="false" hgrow="NEVER" minWidth="10.0" />
+												<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+											</columnConstraints>
+											<rowConstraints>
+												<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+												<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+												<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+											</rowConstraints>
+											<children>
+												<Label maxWidth="1.7976931348623157E308" text="%MazeFX.status" textAlignment="RIGHT" textFill="#808080" GridPane.halignment="RIGHT">
+													<font>
+														<Font name="System Bold" size="12.0" />
+													</font>
+												</Label>
+												<Label fx:id="serverStatusText" text="%MazeFX.status.stopped" GridPane.columnIndex="1" />
+												<Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="%MazeFX.playerCount" textAlignment="RIGHT" textFill="#808080" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+													<font>
+														<Font name="System Bold" size="12.0" />
+													</font>
+												</Label>
+												<Spinner fx:id="maxPlayer" cache="true" initialValue="1" max="4" min="1" prefWidth="50.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
+												</Spinner>
+												<HBox alignment="CENTER_LEFT" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+													<children>
+														<Button fx:id="serverStart" mnemonicParsing="false" onAction="#serverStartAction" prefWidth="50.0" text="%MazeFX.start" />
+														<Button fx:id="serverStop" mnemonicParsing="false" onAction="#serverStopAction" prefWidth="50.0" text="%MazeFX.stop" />
+													</children>
+												</HBox>
+											</children>
+										</GridPane>
+									</children>
+								</AnchorPane>
+							</content>
+						</TitledPane>
+						<TitledPane collapsible="false" text="%MazeFX.currentGame">
+							<content>
+								<AnchorPane minHeight="50.0" minWidth="0.0" prefWidth="200.0" styleClass="currentGamePane">
+									<children>
+										<StackPane layoutX="7.0" layoutY="-13.0" prefHeight="60" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+											<children>
+												<Label fx:id="playerStatsPlaceholder" text="%MazeFX.noPlayers" textAlignment="CENTER" textFill="#80808080" wrapText="true">
+													<font>
+														<Font name="System Bold" size="13.0" />
+													</font>
+													<padding>
+														<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+													</padding>
+													<effect>
+														<Glow level="0.38" />
+													</effect>
+												</Label>
+												<VBox fx:id="playerStatsContrainer" prefWidth="100.0" />
+											</children>
+										</StackPane>
+									</children>
+								</AnchorPane>
+							</content>
+						</TitledPane>
+						<TitledPane collapsible="false" maxHeight="1.7976931348623157E308" text="%MazeFX.log" VBox.vgrow="ALWAYS">
+							<content>
+								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" styleClass="logPane">
+									<children>
+										<TextArea fx:id="logArea" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="it's quite lonely here ..." AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+											<font>
+												<Font name="Monospaced Regular" size="11.0" />
+											</font>
+										</TextArea>
+									</children>
+								</AnchorPane>
+							</content>
+						</TitledPane>
+					</children>
+				</VBox>
+			</children>
+		</HBox>
+	</children>
+</StackPane>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>de.fhac.mazenet</groupId>
+  <artifactId>maze-server</artifactId>
+  <versioning>
+    <release>ss2016</release>
+    <versions>
+      <version>ss2016</version>
+    </versions>
+    <lastUpdated>20170314124325</lastUpdated>
+  </versioning>
+</metadata>

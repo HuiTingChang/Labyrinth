@@ -1,0 +1,65 @@
+.nav3DVBox {
+    -fx-opacity: 0.5;
+}
+
+.nav3DVBox:hover {
+    -fx-opacity: 1;
+}
+
+.move3dGrid {
+    -fx-pref-width: 75;
+    -fx-pref-height: 75;
+    -fx-max-width: 75;
+    -fx-max-height: 75;
+
+    -fx-background-color: #fff;
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
+}
+
+.move3dGrid .button {
+    -fx-pref-width: 25;
+    -fx-pref-height: 25;
+    -fx-max-width: 25;
+    -fx-max-height: 25;
+    -fx-min-width: 25;
+    -fx-min-height: 25;
+
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+    -fx-text-fill: #7788cc;
+    -fx-font-size: 17;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-graphic-text-gap: 0;
+    -fx-background-radius: 50%;
+    -fx-border-radius: 50%;
+    /*-fx-scale-x: 0.8;
+    -fx-scale-y: 0.8;
+    -fx-scale-z: 0.8;/**/
+}
+
+.move3dGrid .button:hover {
+    -fx-text-fill: #3366ff;
+    /*-fx-background-color: rgba(100,100,100,0.35);/**/
+    /*-fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-scale-z: 1;/**/
+}
+
+
+.titled-pane
+{
+    /*-fx-text-fill: #ddd;/**/
+}
+
+.titled-pane > .title
+{
+    /*-fx-background-color: linear-gradient(to bottom, #ccc, #ddd 5%, #ddd 98%, #ccc);/**/
+    /*-fx-background-insets: 0;/**/
+    -fx-background-radius: 0;
+}
+/**/
+.currentGamePane, .logPane {
+    -fx-padding: 0;
+}

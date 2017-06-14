@@ -1,0 +1,164 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>de.fhac.mazenet</groupId>
+    <artifactId>maze-server</artifactId>
+    <version>ss2016</version>
+    <name>maze-server</name>
+    <url>https://git.noc.fh-aachen.de/mazenet/maze-server</url>
+
+    <scm>
+        <connection>scm:git:https://git.noc.fh-aachen.de/mazenet/maven-repo.git</connection>
+        <developerConnection>scm:git:https://git.noc.fh-aachen.de/mazenet/maze-server.git</developerConnection>
+        <url>https://git.noc.fh-aachen.de/mazenet/maze-server</url>
+    </scm>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <configuration>
+                        <skipDeploy>true</skipDeploy>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>de.fhac.mazenet.server.Game</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <executable>maven</executable>
+                    <!-- optional -->
+                    <mainClass>de.fhac.mazenet.server.Game</mainClass>
+                    <workingDirectory>/tmp</workingDirectory>
+                    <arguments>
+                        <argument>-X</argument>
+                    </arguments>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.8.1</version>
+                <configuration>
+                    <altReleaseDeploymentRepository>
+                        internal.repo::default::file://${project.build.directory}/mvn-repo/release
+                    </altReleaseDeploymentRepository>
+                    <altSnapshotDeploymentRepository>
+                        internal.repo::default::file://${project.build.directory}/mvn-repo/snapshot
+                    </altSnapshotDeploymentRepository>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>stage-for-scm-publish</id>
+                        <phase>post-site</phase>
+                        <goals>
+                            <goal>stage</goal>
+                        </goals>
+                        <configuration>
+                            <siteDirectory>${project.build.directory}/mvn-repo/snapshot</siteDirectory>
+                            <skipDeploy>false</skipDeploy><!-- MSITE-652: configuration won't be necessary with m-site-p 3.2 -->
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-scm-publish-plugin</artifactId>
+                <version>1.1</version>
+                <executions>
+                    <execution>
+                        <id>scm-publish</id>
+                        <phase>site-deploy</phase>
+                        <goals>
+                            <goal>publish-scm</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <scmBranch>snapshot</scmBranch>
+                    <!-- svn location for publication -->
+                    <pubScmUrl>scm:git:https://git.noc.fh-aachen.de/mazenet/maven-repo.git</pubScmUrl>
+                </configuration>
+            </plugin>
+
+        </plugins>
+
+    </build>
+    <packaging>jar</packaging>
+    <distributionManagement>
+        <repository>
+            <id>mazenet-release-repo</id>
+            <name>Mazenet Release Repository</name>
+            <url>file://${project.build.directory}/mvn-repo/release</url>
+        </repository>
+        <snapshotRepository>
+            <id>mazenet-snapshot-repo</id>
+            <name>Mazenet Snapshot Repository</name>
+            <url>file://${project.build.directory}/mvn-repo/snapshot</url>
+        </snapshotRepository>
+        <site>
+            <id>git-maven-repo</id>
+            <url>scm:git:https://git.noc.fh-aachen.de/mazenet/maven-repo.git</url>
+        </site>
+    </distributionManagement>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>
